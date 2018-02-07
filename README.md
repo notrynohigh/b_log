@@ -1,5 +1,5 @@
 # b_log
-`
+```
 使用接口如下：
 
 #define log_i(...)                           /**< information log      */
@@ -24,7 +24,7 @@
    #define B_LOG_E_LEVEL_PARAM    (B_LOG_PARAM_FILE | B_LOG_PARAM_FUNC | B_LOG_PARAM_LINE) 
    #define B_LOG_A_LEVEL_PARAM    (B_LOG_PARAM_FILE | B_LOG_PARAM_FUNC | B_LOG_PARAM_LINE)
    可选择性打印函数名、文件名、行号
-`
+```
 
 
 
