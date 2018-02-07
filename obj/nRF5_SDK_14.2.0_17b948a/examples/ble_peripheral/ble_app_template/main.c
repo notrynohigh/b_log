@@ -79,6 +79,8 @@
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
 
+#define B_LOG_ENABLE     1
+#include "b_log.h"
 
 #define APP_FEATURE_NOT_SUPPORTED       BLE_GATT_STATUS_ATTERR_APP_BEGIN + 2    /**< Reply when unsupported features are requested. */
 
@@ -796,11 +798,10 @@ int main(void)
     peer_manager_init();
 
     // Start execution.
-    NRF_LOG_INFO("Template example started.");
     application_timers_start();
 
     advertising_start(erase_bonds);
-
+    log_e("helloworld %d %d\n\r", 1, 2);
     // Enter main loop.
     for (;;)
     {

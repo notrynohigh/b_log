@@ -40,7 +40,8 @@
 #include "bsp_btn_ble.h"
 #include "nrf_sdh_ble.h"
 #include "bsp.h"
-
+#define B_LOG_ENABLE          1
+#include "b_log.h"
 #define BTN_ID_WAKEUP             0  /**< ID of button used to wake up the application. */
 #define BTN_ID_SLEEP              0  /**< ID of button used to put the application into sleep mode. */
 #define BTN_ID_DISCONNECT         0  /**< ID of button used to gracefully terminate a connection on long press. */
@@ -234,7 +235,7 @@ NRF_SDH_BLE_OBSERVER(m_ble_observer, BSP_BTN_BLE_OBSERVER_PRIO, ble_evt_handler,
 uint32_t bsp_btn_ble_init(bsp_btn_ble_error_handler_t error_handler, bsp_event_t * p_startup_bsp_evt)
 {
     uint32_t err_code = NRF_SUCCESS;
-
+    log_w("helloworldbbbb\n\r");
     m_error_handler = error_handler;
 
     if (p_startup_bsp_evt != NULL)
@@ -246,6 +247,5 @@ uint32_t bsp_btn_ble_init(bsp_btn_ble_error_handler_t error_handler, bsp_event_t
     {
         err_code = advertising_buttons_configure();
     }
-
     return err_code;
 }
