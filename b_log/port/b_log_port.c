@@ -1,7 +1,7 @@
 /**
  ****************************************************************************
  * MIT License
- * @file b_log_config.h  
+ * @file b_log_port.c  
  * @version v0.0.1
  * Copyright (c) [2017-2018] [Bean  email: notrynohigh@outlook.com]
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,8 +21,9 @@
  * SOFTWARE.
  *****************************************************************************
  */
-#ifndef __B_LOG_CONFIG_H__
-#define __B_LOG_CONFIG_H__
+#include "b_log_port.h"
+#include "SEGGER_RTT.h"
+
 
 /**
  * @addtogroup B_LOG
@@ -30,43 +31,33 @@
  */
 
 /**
- * @defgroup B_LOG_CONFIG global configuration
+ * @defgroup B_LOG_PORT
  * @{
  */
 
-#ifndef B_LOG_LEVEL_CFG
-#define B_LOG_LEVEL_CFG    B_LOG_LEVEL_I            /**<  @ref B_LOG_LEVEL  */
-#endif
 
-/**
- * @brief there are two ways to control whether log output
- * if B_LOG_CTRL_TOGETHER == 1 Then B_LOG_LEVEL_CFG decide whether log output
- * if B_LOG_CTRL_TOGETHER == 0 Then log in all files can be controlled individually
- * #define B_LOG_ENABLE  
- * #include "b_log.h"
- * if you defined B_LOG_ENABLE above "#include "b_log.h"", log can output. it also be limited by B_LOG_LEVEL_CFG
- */
-#define B_LOG_CTRL_TOGETHER            0
+void b_log_putc(char ch)
+{
+    SEGGER_RTT_PutChar(0, ch);
+}
 
-#define B_LOG_FILE_NAME_LEN_MAX        10         
-#define B_LOG_BUF_SIZE                 128
-#define B_LOG_HEAD_STRING              ">>"
-/** config param @ref B_LOG_PARAM */
-#define B_LOG_I_LEVEL_PARAM    (B_LOG_PARAM_NULL)  
-#define B_LOG_W_LEVEL_PARAM    (B_LOG_PARAM_FUNC | B_LOG_PARAM_LINE) 
-#define B_LOG_E_LEVEL_PARAM    (B_LOG_PARAM_FILE | B_LOG_PARAM_FUNC | B_LOG_PARAM_LINE) 
-#define B_LOG_A_LEVEL_PARAM    (B_LOG_PARAM_FILE | B_LOG_PARAM_FUNC | B_LOG_PARAM_LINE) 
 
 
 /**
  * @}
  */
-
+ 
 /**
  * @}
  */
 
-#endif
+
+
+
+
+
+
+
 
 
 
