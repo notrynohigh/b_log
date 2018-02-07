@@ -46,23 +46,6 @@ static const char scg_log_head_table[B_LOG_LEVEL_N] =
 #if (B_LOG_BUF_SIZE < B_LOG_BUF_MIN)	 
 	 #error "log config error: B_LOG_FILE_NAME_LEN_MAX < 64"	 
 #endif
-/**
- * @defgroup PRIVATE_FUNCTIONS 
- * @{
- */
- 
-int fputc(int dat, FILE *P)
-{
-    char c = (char)(dat & 0xff);
-    b_log_putc(c);
-	  return dat;
-}
-
-/**
- * @}
- */
-
-
 
 /**
  * @defgroup B_LOG_INTERFACE 
@@ -133,7 +116,7 @@ void b_log_out(uint8_t type, const char *ptr_file, const char *ptr_func, uint32_
 		{
 		    return;
 		}
-    printf("%s", pbuf);    
+    b_log_put_string(pbuf);    
 }
 
 

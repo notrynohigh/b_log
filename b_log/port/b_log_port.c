@@ -36,12 +36,10 @@
  */
 
 
-void b_log_putc(char ch)
+void b_log_put_string(char *pstr)
 {
-    SEGGER_RTT_PutChar(0, ch);
+    SEGGER_RTT_WriteString(0, pstr);
 }
-
-
 
 /**
  * @}

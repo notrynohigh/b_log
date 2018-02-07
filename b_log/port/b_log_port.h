@@ -35,7 +35,7 @@
  */
 
 
-void b_log_putc(char ch);
+void b_log_put_string(char *pstr);
 
 
 /**
