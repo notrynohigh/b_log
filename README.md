@@ -1,5 +1,6 @@
 # b_log
 ```
+V0.0.1
 使用接口如下：
 
 #define log_i(...)                           /**< information log      */
@@ -25,6 +26,12 @@
    #define B_LOG_A_LEVEL_PARAM    (B_LOG_PARAM_FILE | B_LOG_PARAM_FUNC | B_LOG_PARAM_LINE)
    可选择性打印函数名、文件名、行号
 ```
+```
+V0.0.2
+增加功能：
+1、支持缓存
+2、增加flush接口
+3、输出控制默认为统一由B_LOG_LEVEL_CFG决定，如果需要单独控制C文件里的打印，自行更改配置文件，并阅读V0.0.1功能介绍的第2条
+```
 
-
-
+emial: notrynohigh@outlook.com
