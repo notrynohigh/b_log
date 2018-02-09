@@ -46,7 +46,7 @@
  * #include "b_log.h"
  * if you defined B_LOG_ENABLE above "#include "b_log.h"", log can output. it also be limited by B_LOG_LEVEL_CFG
  */
-#define B_LOG_CTRL_TOGETHER            0
+#define B_LOG_CTRL_TOGETHER            1
 
 #define B_LOG_FILE_NAME_LEN_MAX        10         
 #define B_LOG_BUF_SIZE                 128
@@ -56,11 +56,21 @@
 #define B_LOG_W_LEVEL_PARAM    (B_LOG_PARAM_FUNC | B_LOG_PARAM_LINE) 
 #define B_LOG_E_LEVEL_PARAM    (B_LOG_PARAM_FILE | B_LOG_PARAM_FUNC | B_LOG_PARAM_LINE) 
 #define B_LOG_A_LEVEL_PARAM    (B_LOG_PARAM_FILE | B_LOG_PARAM_FUNC | B_LOG_PARAM_LINE) 
+/**
+ * @}
+ */
 
+/**
+ * @defgroup B_LOG_CACHE_CFG b_log cache configuration
+ * @{
+ */
+#define B_LOG_CACHE_ENABLE              0
+#define B_LOG_CACHE_SIZE                512
 
 /**
  * @}
  */
+
 
 /**
  * @}

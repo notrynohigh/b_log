@@ -64,11 +64,24 @@
 #endif
 #endif
 
+#if B_LOG_CACHE_ENABLE
+typedef struct
+{
+    char cache_buf[B_LOG_CACHE_SIZE];
+	  uint32_t count;
+}b_log_cache_info_t; 
+#endif
 /**
  * @addtogroup B_LOG_INTERFACE
  * @{
  */
 void b_log_out(uint8_t ,const char *, const char *, uint32_t , char *fmt, ...);
+#if B_LOG_CACHE_ENABLE
+void b_log_flush(void);
+#define b_log_f()    b_log_flush()
+#else
+#define b_log_f()
+#endif
 
 #ifdef B_LOG_ENABLE
 #if (B_LOG_LEVEL_CFG <= B_LOG_LEVEL_I)
@@ -110,6 +123,7 @@ void b_log_out(uint8_t ,const char *, const char *, uint32_t , char *fmt, ...);
 #define log_w(...)          b_log_w(__VA_ARGS__)                      /**< warning log          */
 #define log_e(...)          b_log_e(__VA_ARGS__)                      /**< error log            */
 #define log_a(cond, ...)    b_log_a(cond, __VA_ARGS__)                /**< assert log           */
+#define log_f()             b_log_f()                                 /**< log flush            */
 /**
  * @}
  */

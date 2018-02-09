@@ -26,7 +26,7 @@
 #include "stdio.h"
 #include "stdarg.h"
 #include "string.h"
-
+#include "stdlib.h"
 /**
  * @addtogroup B_LOG
  * @{
@@ -47,10 +47,47 @@ static const char scg_log_head_table[B_LOG_LEVEL_N] =
 	 #error "log config error: B_LOG_FILE_NAME_LEN_MAX < 64"	 
 #endif
 
+#if B_LOG_CACHE_ENABLE
+static b_log_cache_info_t g_b_log_cache_info = 
+{
+    .count = 0,
+};
+#endif	 
 /**
  * @defgroup B_LOG_INTERFACE 
  * @{
  */
+#if B_LOG_CACHE_ENABLE
+static void b_log_cache_handle(char *pbuf)	 
+{
+    uint32_t len = 0;
+	  uint32_t i = 0;
+	  if(pbuf == NULL)
+		{
+		    return;
+		}
+		len = strlen(pbuf);
+	  for(i = 0;i < len;i++)
+		{
+		    if(pbuf[i] != '\n')
+				{
+				    g_b_log_cache_info.cache_buf[g_b_log_cache_info.count++] = pbuf[i];
+					  if(g_b_log_cache_info.count >= (B_LOG_CACHE_SIZE - 1))
+						{
+						    g_b_log_cache_info.cache_buf[g_b_log_cache_info.count] = 0;
+							  b_log_put_string(g_b_log_cache_info.cache_buf);
+							  g_b_log_cache_info.count = 0;
+						}
+				}
+				else
+				{
+				    g_b_log_cache_info.cache_buf[g_b_log_cache_info.count] = 0;
+					  b_log_put_string(g_b_log_cache_info.cache_buf);
+					  g_b_log_cache_info.count = 0;
+				}
+		}
+}	 
+#endif
 
 void b_log_out(uint8_t type, const char *ptr_file, const char *ptr_func, uint32_t line, char *fmt, ...)
 {
@@ -116,9 +153,24 @@ void b_log_out(uint8_t type, const char *ptr_file, const char *ptr_func, uint32_
 		{
 		    return;
 		}
-    b_log_put_string(pbuf);    
+#if B_LOG_CACHE_ENABLE
+    b_log_cache_handle(pbuf);		
+#else
+    b_log_put_string(pbuf);   
+#endif
 }
 
+#if B_LOG_CACHE_ENABLE
+void b_log_flush()
+{
+	  if(g_b_log_cache_info.count > 0)
+		{
+        g_b_log_cache_info.cache_buf[g_b_log_cache_info.count] = 0x0;
+        b_log_put_string(g_b_log_cache_info.cache_buf);
+        g_b_log_cache_info.count = 0;
+		}
+}
+#endif
 
 
 /**

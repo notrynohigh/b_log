@@ -784,7 +784,7 @@ static void advertising_start(bool erase_bonds)
 int main(void)
 {
     bool erase_bonds;
-
+    int i = 0xfff;
     // Initialize.
     log_init();
     timers_init();
@@ -809,7 +809,11 @@ int main(void)
         {
             power_manage();
         }
-    }
+				for(i = 0;i < 0xfff;i++);
+        {
+				    log_e(" helloworld %d ", i);
+				}				
+		}
 }
 
 
