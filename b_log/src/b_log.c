@@ -172,7 +172,21 @@ void b_log_flush()
 }
 #endif
 
-
+void b_log_printf(char *fmt, ...)
+{
+    va_list ap;
+    int str_len = 0;
+	  char *pbuf = (char *)sg_log_buf;
+    va_start(ap, fmt);
+		str_len = vsnprintf(pbuf, B_LOG_BUF_SIZE, fmt, ap);
+		va_end(ap); 
+    if(str_len < 0)
+		{
+		    return;
+		}
+		pbuf[str_len] = '\0';
+    b_log_put_string(pbuf);		
+}
 /**
  * @}
  */

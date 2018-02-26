@@ -76,6 +76,8 @@ typedef struct
  * @{
  */
 void b_log_out(uint8_t ,const char *, const char *, uint32_t , char *fmt, ...);
+void b_log_printf(char *fmt, ...);
+
 #if B_LOG_CACHE_ENABLE
 void b_log_flush(void);
 #define b_log_f()    b_log_flush()
@@ -124,6 +126,8 @@ void b_log_flush(void);
 #define log_e(...)          b_log_e(__VA_ARGS__)                      /**< error log            */
 #define log_a(cond, ...)    b_log_a(cond, __VA_ARGS__)                /**< assert log           */
 #define log_f()             b_log_f()                                 /**< log flush            */
+
+#define log_printf(...)     b_log_printf(__VA_ARGS__)                 /**< pure output          */
 /**
  * @}
  */

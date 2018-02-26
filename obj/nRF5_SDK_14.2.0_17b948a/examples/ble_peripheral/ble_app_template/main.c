@@ -802,6 +802,7 @@ int main(void)
 
     advertising_start(erase_bonds);
     log_e("helloworld %d %d\n\r", 1, 2);
+	  log_printf("hahaoogogox %d\n\r", 1);
     // Enter main loop.
     for (;;)
     {
